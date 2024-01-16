@@ -12,3 +12,10 @@ create or replace PROCEDURE add_to_fornitore(
 BEGIN
     INSERT INTO FORNITORE (CF, NOME) VALUES (v_cf, v_name);
 end;
+    /
+declare
+    v_fornitore FORNITORE%rowtype;
+begin
+    select NOME, CF into v_fornitore from FORNITORE where NOME like 'PAOLO';
+    DBMS_OUTPUT.PUT_LINE(v_fornitore.CF);
+end;
