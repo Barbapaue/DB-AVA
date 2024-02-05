@@ -6,6 +6,22 @@ begin
     DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || ' rows changed.');
     COMMIT;
 end;
+   /
+DECLARE
+   c_id customers.id%type;
+   c_name customers.name%type;
+   c_addr customers.address%type;
+   CURSOR c_customers is
+      SELECT id, name, address FROM customers;
+BEGIN
+   OPEN c_customers;
+   LOOP
+   FETCH c_customers into c_id, c_name, c_addr;
+      EXIT WHEN c_customers%notfound;
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr);
+   END LOOP;
+   CLOSE c_customers;
+END;
 /
 -- CURSORI ESPLICITI
 create or replace procedure esempio_cursori is
